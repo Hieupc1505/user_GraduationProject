@@ -1,0 +1,57 @@
+{
+    "folders": [
+        {
+            "path": "../../../../../../Anonystick"
+        },
+        {
+            "path": "../../../../../../sportv2"
+        },
+        {
+            "path": "../../../../../../shopRetailer"
+        },
+        {
+            "path": "../../../../../../myBlog"
+        },
+        {
+            "path": "../../../../../../SGFM"
+        },
+        {
+            "path": "../../../../../../gameCanvas"
+        },
+        {
+            "path": "../../../../../../reactTypescript"
+        },
+        {
+            "path": "../../../../../../turboMUI"
+        },
+        {
+            "path": "../../../../../../typescritpMUI"
+        },
+        {
+            "path": "../../../../../../serversport98"
+        },
+        {
+            "path": "../../../../../../apiNodejs"
+        },
+        {
+            "path": "../../../../.."
+        },
+        {
+            "path": "../../../../../../algorithmAndDatastructure"
+        },
+        {
+            "path": "../../../../../../admin"
+        },
+        {
+            "path": "../../../../../../adminJs"
+        },
+        {
+            "path": "../../../../../../v2_adminjs"
+        }
+    ],
+    "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "liveServer.settings.multiRootWorkspaceName": "gameCanvas",
+        "jest.disabledWorkspaceFolders": ["SGFM"]
+    }
+}
