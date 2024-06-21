@@ -4,7 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 type UserInfoType = {
     displayName: string;
     address: string;
-    number: string;
+    number: number;
     role: number;
     avatar: string;
 };

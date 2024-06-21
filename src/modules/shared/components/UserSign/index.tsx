@@ -29,6 +29,7 @@ import { userError } from "~/shared/store/userSlice";
 import { changeStatus } from "~/shared/store/snackbar";
 
 import { getErrorMessage } from "./userSign.text";
+import handleSignInWithFireBaseGoogle from "~/shared/utils/handleSignInWithGoogle";
 
 interface IFormInput {
     email: string;
@@ -67,7 +68,7 @@ const UserSign = ({ lang, content, signOption }: signInPageProps) => {
         const res = await userAPI.login(data);
 
         if (res && res.success === true) {
-            console.log("login success");
+            // console.log("login success");
             localStorage.setItem(type.ACESSTOKEN, res.element.tokens);
             dispatch(changeStatusLoad(false));
         } else {
@@ -82,8 +83,21 @@ const UserSign = ({ lang, content, signOption }: signInPageProps) => {
         }
     };
 
-    const googleAuth = () => {
-        window.open(`http://localhost:8080/api/v1/gg/google/callback`, "_self");
+    // const googleAuth = () => {
+    //     window.open(`http://localhost:8080/api/v1/gg/google/callback`, "_self");
+    // };
+
+    const handleLoginGoogle = async () => {
+        const res = await handleSignInWithFireBaseGoogle();
+        if (res && res.user) {
+            const result = await userAPI.loginFirebaseGoogle({
+                email: res.user.email || "",
+                displayName: res.user.displayName || "",
+            });
+            if (result && result.success === true)
+                localStorage.setItem(type.ACESSTOKEN, result.element.tokens);
+            dispatch(changeStatusLoad(false));
+        }
     };
 
     const handleClickChangeToSignUp = () => {
@@ -187,7 +201,8 @@ const UserSign = ({ lang, content, signOption }: signInPageProps) => {
                             startIcon={<FacebookOutlinedIcon />}
                             variant="outlined"
                             sx={{ flex: 1 }}
-                            onClick={googleAuth}
+                            onClick={handleLoginGoogle}
+                            // onClick={googleAuth}
                         >
                             Google
                         </Button>

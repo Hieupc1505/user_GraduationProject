@@ -69,7 +69,7 @@ const DeliveryAddress = ({
                                 variant="body2"
                                 sx={{ fontWeight: "bolder" }}
                             >
-                                {number}
+                                {"0" + number}
                             </Typography>
                         </Stack>
                         <Typography variant="body2" ml={2.5}>

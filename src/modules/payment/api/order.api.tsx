@@ -5,11 +5,16 @@ export interface orderItemProps {
     number: string;
     cost: number;
     notes: string;
-
     type: number;
     total: number;
-
     products: string;
+}
+
+interface infoProps {
+    address: string;
+    number: number;
+    name: string;
+    avatar: string;
 }
 
 const orderAPI = {
@@ -22,6 +27,20 @@ const orderAPI = {
                 `/api/v1/order/banking`,
                 orderItem
             );
+            return data;
+        }
+    },
+    updateUserInfo: async (info: infoProps) => {
+        const { data } = await axios.post("/api/v1/auth/user/update", {
+            data: {
+                address: info.address,
+                number: info.number,
+                displayName: info.name,
+            },
+
+            now: info.avatar,
+        });
+        if (data && data.success) {
             return data;
         }
     },

@@ -31,6 +31,9 @@ import { useAppDispatch, useAppSelector } from "~app/hooks";
 import { getErrorMessageSignUp } from "./signup.text";
 import { Link as LinkRoute } from "@mui/material";
 
+//new
+import handleSignInWithFireBaseGoogle from "~/shared/utils/handleSignInWithGoogle";
+
 interface IFormInput {
     email: string;
     password: string;

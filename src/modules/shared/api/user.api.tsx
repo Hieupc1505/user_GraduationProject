@@ -6,6 +6,12 @@ export interface LoginResponse {
     element: any;
     message?: string;
 }
+
+interface formDataLoginFirebaseGoogle {
+    email: string;
+    displayName: string;
+}
+
 const userAPI = {
     login: async (userSignInInfo: userSignInProps) => {
         try {
@@ -49,6 +55,14 @@ const userAPI = {
         const { data } = await axios.get<LoginResponse>(
             "/api/v1/gg/login/success"
         );
+        return data;
+    },
+    loginFirebaseGoogle: async (formData: formDataLoginFirebaseGoogle) => {
+        const { data } = await axios.post<LoginResponse>(
+            "/api/v1/gg/login/firebase",
+            formData
+        );
+        // console.log(data);
         return data;
     },
 };

@@ -106,13 +106,12 @@ const Info = () => {
             "userInfo.number": form["number"],
             "userInfo.displayName": form["name"],
         };
-        console.log(result);
 
         const { data } = await axios.post("/api/v1/auth/user/update", {
             data: {
-                "userInfo.address": form["address"],
-                "userInfo.number": +form["number"],
-                "userInfo.displayName": form["name"],
+                address: form["address"],
+                number: +form["number"],
+                displayName: form["name"],
             },
             avatar: image,
             now: user?.userInfo.avatar,
@@ -253,7 +252,11 @@ const Info = () => {
                                     name="number"
                                     register={register}
                                     errors={errors}
-                                    value={user?.userInfo?.number}
+                                    value={
+                                        user?.userInfo?.number
+                                            ? "0" + user.userInfo.number
+                                            : ""
+                                    }
                                 />
                                 <CustomTextField
                                     required

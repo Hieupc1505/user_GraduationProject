@@ -22,15 +22,25 @@ const PaymentLayout = () => {
     const { modeTheme, lang } = useAppSelector(
         (state: RootState) => state.mainSlice
     );
+    const { user } = useAppSelector((state: RootState) => state.userReducer);
+
+    // console.log(user);
+
     const [products, setProducts] = useState<cartStoreItem[]>([]);
     const [typeExpress, setTypeExpress] = useState<"express" | "other">(
         "express"
     );
     const navigate = useNavigate();
 
-    const [name, setName] = useState<string>("");
-    const [number, setNumber] = useState<string>("");
-    const [address, setAddress] = useState<string>("");
+    const [name, setName] = useState<string>(() =>
+        user ? user.userInfo?.displayName : ""
+    );
+    const [number, setNumber] = useState<number>(() =>
+        user ? user.userInfo?.number : 0
+    );
+    const [address, setAddress] = useState<string>(() =>
+        user ? user.userInfo?.address : ""
+    );
     const { cart } = useAppSelector((state: RootState) => state.cartReducer);
     const dispatch = useAppDispatch();
 
@@ -44,7 +54,7 @@ const PaymentLayout = () => {
 
     const handleSelectInfo = (
         name: string,
-        number: string,
+        number: number,
         address: string
     ) => {
         setName(() => name);
@@ -67,12 +77,8 @@ const PaymentLayout = () => {
     const changeType = (v: "express" | "other") => {
         setTypeExpress(v);
     };
-
     const [getSelected, handleSelect] = useOptions(["0"]);
-
     const orderProduct = async () => {
-        // console.log("shipping : ---> ", name, number, address, typeExpress);
-        // console.log("payment: ---> ", getSelected());
         if (address) {
             let total = 0;
             const arr = products.map((item) => {
@@ -94,7 +100,7 @@ const PaymentLayout = () => {
             }
             const data = await orderAPI.addOrderItem({
                 address: address,
-                number: number,
+                number: "0" + number,
                 cost: paymentStoreText["ship"][lang][typeExpress],
                 notes: "Cho nhieu hanhf muoi owt",
                 type: +getSelected(),

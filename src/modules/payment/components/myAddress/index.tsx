@@ -5,41 +5,17 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import DialogMainSelect from "./DialogMainSelect";
 import DialogMainAdd from "./DialogMainAdd";
 import { useToggle } from "~/shared/hooks/useToggle";
+import orderAPI from "~/payment/api/order.api";
 
 interface MyAddressProps {
     anchor: boolean;
     handleClickOpen: () => void;
     handleClose: () => void;
-    handleSelectInfo: (name: string, number: string, address: string) => void;
+    handleSelectInfo: (name: string, number: number, address: string) => void;
 }
-
-const library = {
-    select: {
-        status: true,
-        actions: ["Hủy", "Xác Nhận"],
-    },
-};
-
-const data = [
-    {
-        name: "Van Hieu 956",
-        number: "09878937845",
-        address: "Hải Lựu, Sông Lô, Vĩnh Phúc",
-        detail: "Số nhà 87657",
-        dfu: true,
-    },
-    {
-        name: "Van Hieu 986",
-        number: "09878937845",
-        address: "Hải Lựu, Sông Lô, Vĩnh Phúc",
-        detail: "Số nhà 87657",
-        dfu: false,
-    },
-];
-
 export interface dataProps {
     name: string;
-    number: string;
+    number: number;
     address: string;
     detail: string;
     dfu?: boolean;
@@ -47,7 +23,7 @@ export interface dataProps {
 
 export type storeProps = {
     name: string;
-    number: string;
+    number: number;
     address: string;
     detail: string;
     dfu?: boolean;
@@ -104,7 +80,7 @@ const MyAddress = ({
             setStore((pre) => [
                 {
                     name: user.userInfo.displayName,
-                    number: user.userInfo.number,
+                    number: user.userInfo?.number,
                     detail: "",
                     dfu: true,
                     address: user.userInfo.address,
@@ -112,7 +88,6 @@ const MyAddress = ({
             ]);
         }
     }, [user]);
-    console.log(user);
 
     const handleChangeCheck = useCallback((val: number) => {
         setChecked(val);

@@ -23,6 +23,10 @@ import {
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
+import isNumeric from "~/payment/utils/checkNumber";
+import orderAPI from "~/payment/api/order.api";
+import { useAppSelector } from "~app/hooks";
+import { RootState } from "~app/store";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -68,16 +72,12 @@ const DialogMainAdd: React.FC<addProps> = ({
     handleBack,
     setChecked,
 }) => {
+    const { user } = useAppSelector((state: RootState) => state.userReducer);
     const [value, setValue] = React.useState(0);
     const [key, setKey] = useState(false);
     const wrap = useRef();
     const [addr, setAddr] = useState<string[]>(["", "", ""]);
     const link = useRef();
-    // link.current = {
-    //     p: null,
-    //     d: null,
-    //     w: null,
-    // };
     const [store, setStore] = useState<storeProps>({
         p: [],
         d: [],
@@ -216,22 +216,30 @@ const DialogMainAdd: React.FC<addProps> = ({
             return preV.map((item, index) => (index < value ? item : ""));
         });
     };
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const form = new FormData(event.currentTarget);
-        console.log({
-            email: form.get("name"),
-            password: form.get("number"),
-            ad: form.get("address"),
-            ad2: form.get("detail"),
-            default: form.get("default"),
-        });
         const key = form.get("default") === "on" ? true : false;
         const index = data ? data.index : undefined;
+        const number = form.get("number")?.toString() || "";
+        if (!isNumeric(number)) {
+            alert("Vui lòng nhập lại số điện thoại");
+            return;
+        }
+        if (key) {
+            await orderAPI.updateUserInfo({
+                address: (form.get("detail")?.toString() +
+                    "\n" +
+                    valueAddress) as string,
+                number: +number,
+                name: form.get("name")?.toString() || "",
+                avatar: user?.userInfo.avatar || "",
+            });
+        }
         handleAdd(
             {
                 name: form.get("name")?.toString() || "",
-                number: form.get("number")?.toString() || "",
+                number: +number,
                 address: valueAddress as string,
                 detail: form.get("detail")?.toString() || "",
                 dfu: key,
@@ -296,6 +304,15 @@ const DialogMainAdd: React.FC<addProps> = ({
             ));
         }
     };
+    // console.log(valueAddress.includes("\n"));
+
+    const convertAddress = (address: string, index: number) => {
+        if (address.includes("\n")) {
+            return address.split("\n")[index];
+        }
+
+        return "";
+    };
 
     return (
         <Box
@@ -339,7 +356,7 @@ const DialogMainAdd: React.FC<addProps> = ({
                         onFocus={handleFocus}
                         focused={key}
                         // onBlur={(e) => handleClose(e)}
-                        value={valueAddress}
+                        value={convertAddress(valueAddress, 1)}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -433,6 +450,7 @@ const DialogMainAdd: React.FC<addProps> = ({
                     fullWidth
                     name="detail"
                     defaultValue={data?.detail}
+                    value={convertAddress(valueAddress, 0)}
                 />
                 <Box>
                     <FormControlLabel

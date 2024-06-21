@@ -22,7 +22,7 @@ interface DialogMainSelectProps {
     btnAction: (val: boolean) => void;
     data: {
         name: string;
-        number: string;
+        number: number;
         address: string;
         detail: string;
         dfu?: boolean;
@@ -30,7 +30,7 @@ interface DialogMainSelectProps {
     handleClose: () => void;
     checked: number;
     handleUpdate: (key: number) => void;
-    handleSelectInfo: (name: string, number: string, address: string) => void;
+    handleSelectInfo: (name: string, number: number, address: string) => void;
 }
 
 const DialogMainSelect = ({
@@ -89,7 +89,7 @@ const DialogMainSelect = ({
                                             <CustomAddress
                                                 name={name}
                                                 number={number}
-                                                detail={address}
+                                                detail={detail + address}
                                                 dfu={dfu}
                                                 index={index}
                                                 handleUpdate={handleUpdate}
