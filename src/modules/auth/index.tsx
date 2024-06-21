@@ -1,4 +1,3 @@
-import React from "react";
 import AuthLayout from "./layout";
 import { useParams } from "react-router-dom";
 const AuthPage = () => {

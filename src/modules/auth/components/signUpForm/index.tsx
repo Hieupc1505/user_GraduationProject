@@ -12,11 +12,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import type { RootState } from "../../../../store";
-import { useSelector, useDispatch } from "react-redux";
-import { authStateProps } from "~/auth/store/authSlice";
-import {} from "~/auth/store/authAction";
-
 export default function SignUpForm() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

@@ -1,4 +1,3 @@
-import React from "react";
 import SignInForm from "../components/signInForm";
 import SignUpForm from "../components/signUpForm";
 type AuthPageProps = {

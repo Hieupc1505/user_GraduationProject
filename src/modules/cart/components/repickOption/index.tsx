@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Typography, Popover, Button } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import PopupState, {
-    bindTrigger,
-    bindMenu,
-    bindPopper,
-    bindPopover,
-} from "material-ui-popup-state";
+
+import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 
 import SelectOption from "~/shared/features/SelectOption";
 import { useOptions } from "~/shared/hooks/useOptions";

@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
-    Box,
-    styled,
     Typography,
     Container,
-    Checkbox,
     Divider,
     Grid,
     FormControl,
@@ -15,23 +12,19 @@ import PreCheck from "../components/preCheck";
 import { useAppDispatch, useAppSelector } from "~app/hooks";
 import { RootState } from "~app/store";
 import TotalCount from "../components/totalCount";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
 import { cartStoreText } from "./precheck.text";
 import ProductLists from "~/shared/components/ProductLists";
-import ProductItem from "~/shared/components/ProductItem";
-import { Link, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import BoxTheme from "~/shared/components/BoxTheme";
-import { cartItemProps, cartStoreItem } from "../store/cartAction";
+import { cartStoreItem } from "../store/cartAction";
 import { getAllCart } from "../store/cartAction";
 import { deleteItemCart } from "~/cart/store/cartAction";
 
 const CartPage = () => {
-    const { modeTheme, lang } = useAppSelector(
-        (state: RootState) => state.mainSlice
-    );
-    const { cart, isLoad, error } = useAppSelector(
-        (state: RootState) => state.cartReducer
-    );
+    const { lang } = useAppSelector((state: RootState) => state.mainSlice);
+    const { cart } = useAppSelector((state: RootState) => state.cartReducer);
 
     const [check, setCheck] = useState<boolean[]>([]);
     const [num, setNum] = useState<number[]>([]);

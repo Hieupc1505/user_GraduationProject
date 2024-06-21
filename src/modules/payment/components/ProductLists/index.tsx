@@ -1,28 +1,23 @@
 import {
-    Avatar,
     Box,
     Typography,
-    ButtonGroup,
     Button,
     Divider,
     TextField,
     Collapse,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import VoucherIcon from "~/payment/assets/svg/voucher";
-import { grey } from "@mui/material/colors";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import ProductItemPayment from "./ProductItemPayment";
 import { Mode } from "~/shared/layout/header";
 import { useAppSelector } from "~app/hooks";
 import { RootState } from "~app/store";
 import { cartStoreItem } from "~/cart/store/cartAction";
 import { convertMoney } from "~/shared/utils/convertMoney";
-import { useOptions } from "~/shared/hooks/useOptions";
 import SelectOption from "~/shared/features/SelectOption";
 
 interface ProductListsProps {
@@ -51,8 +46,7 @@ const ProductLists = ({
     pay,
     handleSelect,
 }: ProductListsProps) => {
-    const { title, productItem, other } = content;
-    const { cart } = useAppSelector((state: RootState) => state.cartReducer);
+    const { title, other } = content;
     const [status, setStatus] = useState(false);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const val = (event.target as HTMLInputElement).value;

@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography, Button, Checkbox } from "@mui/material";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "~app/hooks";
+
+import { useAppSelector } from "~app/hooks";
 import { convertMoney } from "~/shared/utils/convertMoney";
 import { RootState } from "~app/store";
 import CircularProgress from "@mui/material/CircularProgress";
-import { boolean } from "yup";
 
 interface TotalCountProps {
     content: string[];
@@ -58,7 +57,6 @@ const TotalCount = ({
         checkAll(event.target.checked);
     };
     const { lang } = useAppSelector((state: RootState) => state.mainSlice);
-    const navigate = useNavigate();
 
     const [loading, setLoad] = useState<boolean>(false);
     const [disabled, setDisabled] = useState<boolean>(true);

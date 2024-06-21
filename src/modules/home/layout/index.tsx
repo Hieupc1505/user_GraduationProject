@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Typography, Paper, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { mainTextStore } from "./main.store";
 import BennerList from "~/home/components/BannerList";
 import { useAppDispatch, useAppSelector } from "~app/hooks";
@@ -20,9 +20,7 @@ const MainLayout = () => {
         (state: RootState) => state.mainSlice
     );
 
-    const { isLoad, home, error } = useAppSelector(
-        (state: RootState) => state.homeReducer
-    );
+    const { home } = useAppSelector((state: RootState) => state.homeReducer);
 
     useEffect(() => {
         dispatch(homeData());

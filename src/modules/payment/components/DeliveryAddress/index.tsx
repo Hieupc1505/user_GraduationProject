@@ -1,8 +1,6 @@
-import React from "react";
-import { Box, Container, Typography, Button, Stack } from "@mui/material";
+import { Box, Typography, Button, Stack } from "@mui/material";
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
-import { useAppSelector } from "~app/hooks";
-import { RootState } from "~app/store";
+
 interface DeliveryAddressProps {
     handleClickOpen: () => void;
     content: string[];

@@ -7,9 +7,8 @@ import SelectOption from "~/shared/features/SelectOption";
 // import { useOptions } from "~/product/hooks/useOptions";
 import { useOptions } from "~/shared/hooks/useOptions";
 import { OptionProps } from "~/product/store/productSlice";
-import { addToCart } from "~/cart/store/cartAction";
 import { useAppDispatch } from "~app/hooks";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { changeStatus } from "~/shared/store/status.auth";
 

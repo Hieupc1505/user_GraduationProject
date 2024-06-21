@@ -9,9 +9,8 @@ import {
     Button,
     Avatar,
     Divider,
-    Pagination,
+ 
 } from "@mui/material";
-import React from "react";
 
 interface AssessmentProductProps {
     assessmentContent: {

@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { Box, Avatar, Container, styled, AvatarProps } from "@mui/material";
+import { useRef } from "react";
+import { Box, Avatar, styled, AvatarProps } from "@mui/material";
 import { Rerousel } from "rerousel";
 
 const images = [
@@ -14,7 +14,7 @@ const images = [
 
 const Banner = () => {
     const ref = useRef(null);
-    const AvatarCustom = styled(Avatar)<AvatarProps>(({ theme }) => ({
+    const AvatarCustom = styled(Avatar)<AvatarProps>({
         width: "calc(100%)",
         height: "100%",
         fontFamily: "Signika",
@@ -22,7 +22,7 @@ const Banner = () => {
         fontSize: "1.5em",
         border: "solid 1px black",
         backgroundColor: "red",
-    }));
+    });
     return (
         <Box
             sx={{

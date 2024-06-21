@@ -1,25 +1,16 @@
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import {
     Box,
     Typography,
     Checkbox,
     SxProps,
     Avatar,
-    Popover,
     Button,
     ButtonGroup,
     Grid,
-    FormControlLabel,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import PopupState, {
-    bindTrigger,
-    bindMenu,
-    bindPopper,
-    bindPopover,
-} from "material-ui-popup-state";
+
 import RepickOption from "../repickOption";
 
 import { cartItemProps } from "~/cart/store/cartSlice";
@@ -28,7 +19,7 @@ import { useAppDispatch, useAppSelector } from "~app/hooks";
 import { RootState } from "~app/store";
 import { deleteItemCart, updateCart } from "~/cart/store/cartAction";
 import { useDebounce } from "~/shared/hooks/useDebounce";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface ProductItemCartProps {
     sx: SxProps;
@@ -42,8 +33,6 @@ interface ProductItemCartProps {
     img: string;
     handleSetNum: (amount: number, index: number) => void;
 }
-
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const ProductItemCart = ({
     sx,
@@ -85,9 +74,6 @@ const ProductItemCart = ({
         );
         // dispatch();
     }, []);
-
-    const open = Boolean(anchorEl);
-    const id = open ? "simple-popover" : undefined;
 
     const updateNumber = (number: number) => {
         if (data.quantity !== num)

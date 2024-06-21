@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Dialog, DialogActions } from "@mui/material";
+import { Dialog } from "@mui/material";
 
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import DialogMainSelect from "./DialogMainSelect";
 import DialogMainAdd from "./DialogMainAdd";
 import { useToggle } from "~/shared/hooks/useToggle";
-import orderAPI from "~/payment/api/order.api";
 
 interface MyAddressProps {
     anchor: boolean;
@@ -37,14 +35,14 @@ import { useAppSelector } from "~app/hooks";
 
 const MyAddress = ({
     anchor,
-    handleClickOpen,
+
     handleClose,
     handleSelectInfo,
 }: MyAddressProps) => {
     const [next, setNext] = useToggle(false);
 
     const [store, setStore] = useState<storeProps>([]);
-    const [add, setAdd] = useState({});
+
     const [checked, setChecked] = useState(0);
     const [update, setUpdate] = useState<updateProps | undefined>(undefined);
 

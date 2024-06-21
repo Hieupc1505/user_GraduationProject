@@ -6,7 +6,7 @@ import {
     BadgeExtend,
 } from "./styled";
 
-import { Stack, IconButton, Box, Avatar, Typography } from "@mui/material";
+import { Stack, IconButton, Box } from "@mui/material";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -21,18 +21,12 @@ import { RootState } from "~app/store";
 const NavigateHeader = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { isLoad, user, error } = useAppSelector(
-        (state: RootState) => state.authReducer
-    );
 
     const handleClick = (route: string) => {
         navigate(`${route}`, { state: { from: location.pathname } });
     };
 
     const toogleFeatureSignInUp = () => {
-        if (user) {
-            return <MenuListAvatar />;
-        }
         return (
             <Box sx={{ display: "flex", gap: 0.75 }}>
                 <ButtonNav

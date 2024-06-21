@@ -1,6 +1,5 @@
-import React, { Fragment } from "react";
-import { Box, Grid, Typography, styled, TypographyProps } from "@mui/material";
-import { productProps } from "~/product/store/productSlice";
+import { Fragment } from "react";
+import { Grid, Typography, styled, TypographyProps } from "@mui/material";
 
 interface productInfoProps {
     content: string[];
@@ -10,7 +9,7 @@ import { useAppSelector } from "~app/hooks";
 import { RootState } from "~app/store";
 
 const ProductInfo = ({ content }: productInfoProps) => {
-    const { isLoad, product, error } = useAppSelector(
+    const { product } = useAppSelector(
         (state: RootState) => state.productSlice
     );
     const danhMucList = [
@@ -20,30 +19,6 @@ const ProductInfo = ({ content }: productInfoProps) => {
         { key: "Số Lượng hàng kho", value: 2343 },
         { key: "Số Lượng còn lại", value: 345 },
     ];
-
-    const textDetail =
-        "Sản phẩm thảm nhạc cho bé với rất nhiều tiện ích và ưu điểm:" +
-        "\n * Kích thích phát triển thị giác và trí não nhờ" +
-        "các đồ vật treo ngộ nghĩnh cùng các sắc màu tươi vui *" +
-        "Tăng cường sự vận động cơ thể của trẻ, đặc biệt là tay" +
-        "và chân khi nằm chơi \n* Ba mẹ sẽ rảnh rang hơn vì bé tập" +
-        "trung chơi đùa với thảm nhạc mà không quấy khóc Đặc điểm" +
-        "của loại thảm nhạc cho bé kết hợp chơi và vận động:\n 1." +
-        "Thảm chơi nhạc cho bé chạy bằng 3 pin tiểu \n2. Sản phẩm" +
-        "được làm từ loại vật liệu cao cấp, an toàn với sức khỏe" +
-        "của bé, thân thiện môi trường \n3. Đệm nằm êm ái, có nhiều" +
-        "hình thù móc treo ngộ nghĩnh \n4. Màu sắc bắt mắt kích" +
-        "thích thị giác và trí tò mò của trẻ. \n5. Các phím đàn" +
-        "chạm vào sẽ phát nhạc, tăng cường khả năng nghe của bé" +
-        "\n6. Bé có thể chơi đàn piano khi nhỏ bằng chân, và bằng" +
-        "tay khi bé đã ngồi vững Với sản phẩm thảm chơi nhạc cho" +
-        "bé này sẽ giúp bé phát triển cả thể lực và trí tuệ. Cũng" +
-        "như giải phóng cho các mẹ bớt thời gian phải chơi và" +
-        "trông bé. Bé hoàn toàn vừa nằm chơi bên cạnh để mẹ có" +
-        "thể làm thêm các việc nhà khác. Sản phẩm thảm nhạc cho" +
-        "bé nằm chơi phù hợp cho bé trong một thời gian dài phát" +
-        "triển. Từ lúc bé còn nằm ngửa đến khi bé có thể ngồi, bò" +
-        "và đi.";
 
     const TitleText = styled(Typography)<TypographyProps>(({ theme }) => ({
         padding: theme.spacing(1.75),

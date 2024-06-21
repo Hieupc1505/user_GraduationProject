@@ -1,10 +1,4 @@
-import React, {
-    useEffect,
-    useState,
-    MouseEvent,
-    useRef,
-    MouseEventHandler,
-} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
     DialogTitle,
     DialogContent,
@@ -49,7 +43,6 @@ interface addProps {
     handleBack: (val: boolean) => void;
     setChecked: (val: number) => void;
 }
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 interface AddressProps {
     name: string;
@@ -77,7 +70,7 @@ const DialogMainAdd: React.FC<addProps> = ({
     const [key, setKey] = useState(false);
     const wrap = useRef();
     const [addr, setAddr] = useState<string[]>(["", "", ""]);
-    const link = useRef();
+
     const [store, setStore] = useState<storeProps>({
         p: [],
         d: [],

@@ -20,7 +20,6 @@ export const counterSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder.addCase(userSignIn.fulfilled, (state, action) => {
-            const { payload } = action;
             return {
                 isLoad: false,
                 user: null,
@@ -35,7 +34,6 @@ export const counterSlice = createSlice({
             };
         });
         builder.addCase(userLogOut.fulfilled, (state, action) => {
-            const { payload } = action;
             return {
                 isLoad: false,
                 user: null,
@@ -43,7 +41,6 @@ export const counterSlice = createSlice({
             };
         });
         builder.addCase(userLogOut.pending, (state, action) => {
-            const { payload } = action;
             return {
                 ...state,
                 isLoad: true,
