@@ -63,7 +63,7 @@
     ],
     "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "liveServer.settings.multiRootWorkspaceName": "gameCanvas",
+        "liveServer.settings.multiRootWorkspaceName": "shopMui",
         "jest.disabledWorkspaceFolders": ["SGFM"]
     }
 }
