@@ -12,7 +12,7 @@ export interface ProductSlideProps {
     products: productProps[];
 }
 
-const ProductSlide = ({ products }: ProductSlideProps) => {
+const ProductSlide: React.FC<ProductSlideProps> = ({ products }) => {
     const ref = useRef(null);
     const { lang } = useAppSelector((state: RootState) => state.mainSlice);
 
@@ -34,7 +34,6 @@ const ProductSlide = ({ products }: ProductSlideProps) => {
                             lang={lang}
                             variant="square"
                             sale={20}
-                            // sx={{ px: "8px" }}
                         />
                     </Link>
                 </BoxStyled>
@@ -44,51 +43,3 @@ const ProductSlide = ({ products }: ProductSlideProps) => {
 };
 
 export default React.memo(ProductSlide);
-
-// import { Box, Avatar, Container, styled, AvatarProps } from "@mui/material";
-
-// const images = [
-//     "https://routine.vn/media/banner/tmp/images/banner.jpg",
-
-//     "https://routine.vn/media/MAIN_KV-WEBSITE-DESKTOP.jpg",
-
-//     "https://routine.vn/media/banner/tmp/images/banner-cfl-01.jpg",
-
-//     "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
-// ];
-
-// const Banner = () => {
-//     const AvatarCustom = styled(Avatar)<AvatarProps>(({ theme }) => ({
-//         display: "flex",
-//         justifyContent: "center",
-//         alignItems: "center",
-//         width: "calc(100%)",
-//         height: "100%",
-//         fontFamily: "Signika",
-//         fontWeight: "bold",
-//         fontSize: "1.5em",
-//         border: "solid 1px black",
-//         backgroundColor: "red",
-//     }));
-//     return (
-//         <Box
-//             sx={{
-//                 width: "100%",
-//                 height: "80vh",
-//             }}
-//         >
-//             <Rerousel itemRef={ref} interval={1800}>
-//                 {images.map((item, index) => (
-//                     <AvatarCustom
-//                         variant="square"
-//                         key={index}
-//                         src={item}
-//                         ref={ref}
-//                     />
-//                 ))}
-//             </Rerousel>
-//         </Box>
-//     );
-// };
-
-// export default Banner;

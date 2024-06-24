@@ -1,14 +1,14 @@
-import React, { ReactElement, ReactNode, useRef } from "react";
+import React, { MutableRefObject, ReactNode } from "react";
 import { Box, Avatar, Container, styled, AvatarProps } from "@mui/material";
 import { Rerousel } from "rerousel";
 
-export interface SlideProps {
-    timmer: number;
+interface RerouselProps {
     children: ReactNode;
-    ref: React.MutableRefObject<null>;
+    ref: MutableRefObject<HTMLElement | null>;
+    timmer: number;
 }
 
-const Slide = ({ ref, timmer, children }: SlideProps) => {
+const Slide: React.FC<RerouselProps> = ({ ref, timmer, children }) => {
     return (
         <Box
             sx={{
