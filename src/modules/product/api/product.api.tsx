@@ -1,7 +1,4 @@
 import axios from "axios";
-import { getProductProps } from "../store/productAction";
-
-import { cartItemProps } from "../store/productAction";
 
 const productAPI = {
     getProductById: async (productId: string) => {

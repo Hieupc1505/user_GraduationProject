@@ -109,8 +109,6 @@ export const userSlice = createSlice({
         },
     },
     extraReducers(builder) {
-        // builder.addCase(userSignInByGoogle.pending, userPending);
-        // builder.addCase(userSignInByGoogle.fulfilled, userSuccess);
         builder.addCase(userLogOut.pending, (state) => {
             return {
                 ...state,

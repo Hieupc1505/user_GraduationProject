@@ -7,7 +7,7 @@ import {
     setHeaderDefault,
     setLanguageDefault,
 } from "~/shared/utils/setHeaderDefault";
-import axios from "axios";
+
 import { getInfo } from "~/home/api/getInfo.api";
 import { userGetInfo } from "~/auth/store/authAction";
 import { useAppDispatch } from "~app/hooks";

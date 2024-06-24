@@ -11,6 +11,7 @@ import BoxTheme from "~/shared/components/BoxTheme";
 import { useEffect, useState } from "react";
 import { getProductById } from "../store/productAction";
 import axios from "axios";
+
 const { productPreviewText, assessmentText, productInfoText, slideProduct } =
     prodDetailTextStore;
 import { productProps } from "../store/productSlice";

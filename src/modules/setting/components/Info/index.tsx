@@ -30,7 +30,7 @@ import * as Yup from "yup";
 import { getTextInfo } from "./info.text";
 // import Upload from "../UploadImage/upload";
 import UploadImage from "../UploadImage/upload";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export interface IFormInput {
     name: string;
@@ -68,15 +68,13 @@ const Info = () => {
             .required(getTextInfo("required", lang))
             .max(64, getTextInfo("maxLength", lang)),
         email: Yup.string().max(64, getTextInfo("maxLength", lang)),
-        // gender: Yup.string().required(),
-        // birthday: Yup.string().required(),
+
         number: Yup.string()
             .required(getTextInfo("required", lang))
             .matches(phoneRegExp, getTextInfo("match", lang)),
         height: Yup.number(),
         weight: Yup.number(),
         address: Yup.string().required(getTextInfo("required", lang)),
-        // otp: Yup.string().matches(/\b\d{6}\b/g, "Mã OTP không hợp lệ"),
     });
     const {
         register,
@@ -93,20 +91,6 @@ const Info = () => {
     };
 
     const onSubmit: SubmitHandler<IFormInput> = async (form) => {
-        console.log("submit");
-
-        const result = {
-            ...form,
-            birthday: date.toString().split(",").join("/"),
-            gender: value,
-            height: height + 100,
-            weight: weight,
-            avatar: image,
-            "userInfo.address": form["address"],
-            "userInfo.number": form["number"],
-            "userInfo.displayName": form["name"],
-        };
-
         const { data } = await axios.post("/api/v1/auth/user/update", {
             data: {
                 address: form["address"],

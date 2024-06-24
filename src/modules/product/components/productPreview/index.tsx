@@ -22,11 +22,12 @@ import { productProps } from "~/product/store/productSlice";
 import { convertMoney } from "~/shared/utils/convertMoney";
 import { useAppDispatch, useAppSelector } from "~app/hooks";
 import { addToCart } from "~/cart/store/cartAction";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductInfoFeature from "../ProductInfoFeature";
 import { RootState } from "~app/store";
 import { changeStatus } from "~/shared/store/snackbar";
-
+import { cartItemProps } from "~/cart/store/cartSlice";
+import { errorProductPreview } from "./text";
 // import { getText } from "~/shared/utils/getTextbyLang";
 import { getMessage } from "~/product/layout/prodDetail.text";
 import { useEffect, useState } from "react";
@@ -57,21 +58,13 @@ const ProductPreview = ({
     const [like, setLike] = useState<boolean>(false);
     const { id } = useParams();
     const { user } = useAppSelector((state: RootState) => state.userReducer);
-
+    const { cart } = useAppSelector((state: RootState) => state.cartReducer);
+    const navigate = useNavigate();
     const BoxFlexRow = styled(Box)<BoxProps>(({ theme }) => ({
         display: "flex",
         alignItems: "center",
         gap: theme.spacing(0.5),
     }));
-
-    const StyledRating = styled(Rating)({
-        "& .MuiRating-iconFilled": {
-            color: "#ff6d75",
-        },
-        "& .MuiRating-iconHover": {
-            color: "#ff3d47",
-        },
-    });
 
     useEffect(() => {
         setLike(() => {
@@ -79,19 +72,60 @@ const ProductPreview = ({
             return false;
         });
     }, [product, user]);
-    // console.log(user?.liked.includes(id || ""));
-    // console.log("like", like);
 
     const handleAddCart = (num: number, options: string) => {
-        if (product && id)
-            dispatch(
-                addToCart({
-                    productId: id,
-                    price: product?.price,
-                    quantity: num,
-                    selected: options.toString(),
-                })
-            );
+        if (!user) {
+            navigate("/user/login", { state: { link: location.pathname } });
+        } else if (product && id && user)
+            if (!productExistInCart)
+                dispatch(
+                    addToCart({
+                        productId: id,
+                        price: product?.price,
+                        quantity: num,
+                        selected: options.toString(),
+                    })
+                );
+            else {
+                dispatch(
+                    changeStatus({
+                        open: true,
+                        status: "error",
+                        message: errorProductPreview["addCart"][lang],
+                    })
+                );
+            }
+    };
+
+    const handleByNow = async (num: number, options: string) => {
+        console.log(product);
+        if (!user)
+            navigate("/user/login", { state: { link: location.pathname } });
+        else if (product && id && user) {
+            navigate("/payment", {
+                state: {
+                    from: "product",
+                    products: [
+                        {
+                            brand: product.brand,
+                            img: product.images.main,
+                            inventory: product.inventory.quantity,
+                            name: product.name,
+                            options: product.options,
+                            price: product.price,
+                            productId: product._id,
+                            quantity: num,
+                            sale: 150000 * num,
+                            type: hadleType(
+                                options,
+                                product.options[0].value,
+                                product.options[1].value
+                            ),
+                        },
+                    ],
+                },
+            });
+        }
     };
 
     const handleAddLikedProduct = async () => {
@@ -288,6 +322,7 @@ const ProductPreview = ({
                         options={product?.options}
                         quantity={product?.inventory.quantity}
                         handleAddCart={handleAddCart}
+                        handleByNow={handleByNow}
                     />
                     <Divider variant="middle" sx={{ mt: 4 }} />
                     <ProductInfoFeature />
@@ -298,3 +333,16 @@ const ProductPreview = ({
 };
 
 export default ProductPreview;
+
+const productExistInCart = (productId: string, cart: cartItemProps[]) => {
+    return cart.some((product) => product.productId === productId);
+};
+
+const hadleType = (str: string, colors: string[], sizes: string[]) => {
+    const opts = str.split(",");
+    return (
+        colors[Number.parseInt(opts[0])].toString() +
+        "," +
+        sizes[Number.parseInt(opts[1])]
+    );
+};

@@ -13,7 +13,6 @@ import { changeLanguage } from "../store/mainSlice";
 import { getAllCart } from "~/cart/store/cartAction";
 import { resetCart } from "~/cart/store/cartSlice";
 import { type } from "../store/type.store";
-import AuthUser from "~/shared/components/AuthUser";
 
 // import { useColorScheme } from "@mui/material";
 import { useToggle } from "~/shared/hooks/useToggle";
@@ -98,9 +97,7 @@ const RenderLayout = ({
             ) : (
                 <HeaderReadOnly />
             )}
-            {!user && (
-                <AuthUser lang={lang} open={open} handleClose={handleClose} />
-            )}
+
             {page}
             <Footer />
         </Fragment>

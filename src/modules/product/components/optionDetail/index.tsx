@@ -18,6 +18,7 @@ interface OptionDetailProps {
     options?: OptionProps[];
     quantity?: number;
     handleAddCart: (n: number, s: string) => void;
+    handleByNow: (n: number, s: string) => void;
 }
 
 const OptionDetail = ({
@@ -26,6 +27,7 @@ const OptionDetail = ({
     quantity = 0,
     options = [],
     handleAddCart,
+    handleByNow,
 }: OptionDetailProps) => {
     const [num, setNum] = useState<number>(1);
 
@@ -59,9 +61,8 @@ const OptionDetail = ({
     const handleClick = () => {
         if (id) handleAddCart(num, getSelectedColor().toString());
     };
-
-    const handleByNow = () => {
-        dispatch(changeStatus(true));
+    const handleByNowClick = () => {
+        if (id) handleByNow(num, getSelectedColor().toString());
     };
 
     return (
@@ -157,7 +158,7 @@ const OptionDetail = ({
                     {actionBtn[1]}
                 </Button>
                 <Button
-                    onClick={handleByNow}
+                    onClick={handleByNowClick}
                     variant="outlined"
                     sx={{
                         padding: "0 20px",

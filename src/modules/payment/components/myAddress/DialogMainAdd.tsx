@@ -37,6 +37,7 @@ function a11yProps(index: number) {
 
 import { updateProps, dataProps } from "./index";
 import axios from "axios";
+
 interface addProps {
     data?: updateProps;
     handleAdd: (data: dataProps, type?: number) => void;

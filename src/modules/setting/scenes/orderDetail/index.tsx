@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-    Avatar,
-    Box,
-    Paper,
-    Typography,
-    Chip,
-    InputLabel,
-    Button,
-} from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import { Avatar, Box, Paper, Typography, Chip, Button } from "@mui/material";
 
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { renderTextField } from "~/setting/utils/renderContent";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 
 import axios from "axios";
+
 import { useAppSelector } from "~app/hooks";
 import { RootState } from "~app/store";
 import { Link } from "react-router-dom";

@@ -2,14 +2,13 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig, loadEnv } from "vite";
 
-// https://vitejs.dev/config/
-export default ({ mode }) => {
-    process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-    const SERVER_LINK =
-        process.env.MODE === "production"
-            ? process.env.VITE_SERVER_PROD
-            : process.env.VITE_SERVER_DEV;
-    return defineConfig({
+export default defineConfig(({ command, mode }) => {
+    // Load env file based on `mode` in the current working directory.
+    // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
+    const env = loadEnv(mode, process.cwd(), "");
+
+    return {
+        // vite config
         plugins: [react()],
         resolve: {
             alias: {
@@ -20,10 +19,16 @@ export default ({ mode }) => {
         server: {
             proxy: {
                 "^/api/.*": {
-                    target: SERVER_LINK,
+                    target:
+                        env.NODE_ENV === "production"
+                            ? env.VITE_SERVER_PROD
+                            : env.VITE_SERVER_DEV,
                     changeOrigin: true,
                 },
             },
         },
-    });
-};
+        define: {
+            VITE_SERVER_DEV: JSON.stringify(env.VITE_SERVER_DEV),
+        },
+    };
+});

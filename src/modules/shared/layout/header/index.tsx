@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { BoxProps } from "@mui/material";
 import {
     AppBar,
     styled,
@@ -16,13 +14,12 @@ import { RootState } from "~app/store";
 import { useCallback, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import AuthUser from "~/shared/components/AuthUser";
 export type Mode = "light" | "dark";
 
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import { useToggle } from "~/shared/hooks/useToggle";
 
 import { changeStatus } from "~/shared/store/status.auth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface HeaderProps {
     scroll?: boolean;
@@ -34,7 +31,7 @@ const Header = ({ scroll = false, position = "fixed" }: HeaderProps) => {
     const { modeTheme, lang } = useAppSelector(
         (state: RootState) => state.mainSlice
     );
-    const { isLoad, user, error } = useAppSelector(
+    const { isLoad, user } = useAppSelector(
         (state: RootState) => state.userReducer
     );
     const { open } = useAppSelector((state: RootState) => state.statusAuth);
@@ -45,10 +42,12 @@ const Header = ({ scroll = false, position = "fixed" }: HeaderProps) => {
     const handleClose = useCallback(() => {
         dispatch(changeStatus(false));
     }, []);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handleOpen = useCallback(() => {
-        dispatch(changeStatus(true));
-    }, []);
+        navigate("/user/login", { state: { link: location.pathname } });
+    }, [location]);
 
     useEffect(() => {
         setMode(modeTheme);
@@ -107,9 +106,7 @@ const Header = ({ scroll = false, position = "fixed" }: HeaderProps) => {
                     setClose={handleClose}
                 />
             </Container>
-            {!user && (
-                <AuthUser lang={lang} open={open} handleClose={handleClose} />
-            )}
+
             <Backdrop
                 sx={{
                     color: "#fff",

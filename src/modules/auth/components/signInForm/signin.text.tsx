@@ -1,7 +1,7 @@
 const errorMessageVn = {
     formatEmail: "Email không hợp lệ",
-    requireEmail: "Vui lòng không để trống",
-    password: "Vui lòng điền mật khẩu",
+    requireEmail: "Vui lòng nhập địa chỉ email",
+    password: "Vui lòng nhập mật khẩu",
     response: "Email hoặc mật khẩu không đúng, vui lòng thử lại",
 };
 
@@ -11,12 +11,6 @@ const errorMessageEn = {
     password: "Please enter the password",
     response: "Email or password is incorrect, please try again",
 };
-
-// const responseError = {
-//     notactive: 'Vui lòng kiểm tra email',
-//     notsignup: 'Email hoặc mật khẩu không đúng!',
-
-// }
 
 export type KeyError = "formatEmail" | "requireEmail" | "password" | "response";
 

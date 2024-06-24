@@ -4,7 +4,7 @@ import HomePage from "./modules/home";
 import { CssBaseline } from "@mui/material";
 import theme from "~/shared/theme/index";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
-import AuthPage from "~/auth";
+// import AuthPage from "~/auth";
 import ProductPage from "~/product";
 import RenderLayout from "~/shared/layout/index.layout";
 import SearchPage from "~/search/layout";
@@ -16,6 +16,9 @@ import Info from "~/setting/components/Info";
 import LikedProduct from "~/setting/scenes/liked";
 import Ordered from "~/setting/scenes/buyed";
 import OrderDetail from "~/setting/scenes/orderDetail";
+
+import AuthLayout from "~/auth/layout";
+
 function App() {
     return (
         <CssVarsProvider theme={theme}>
@@ -31,7 +34,7 @@ function App() {
                             />
                         }
                     />
-                    <Route path="/user/:action" element={<AuthPage />} />
+                    {/* <Route path="/user/:action" element={<AuthPage />} /> */}
                     <Route
                         path="/product/:id"
                         element={
@@ -42,6 +45,23 @@ function App() {
                             />
                         }
                     />
+                    <Route
+                        path="/user/login"
+                        element={<AuthLayout page={"signin"} />}
+                    />
+                    <Route
+                        path="/user/register"
+                        element={<AuthLayout page={"signup"} />}
+                    />
+                    <Route
+                        path="/user/register/next"
+                        element={<AuthLayout page={"verify"} />}
+                    />
+                    <Route
+                        path="/activate"
+                        element={<AuthLayout page={"active"} />}
+                    />
+
                     <Route
                         path="/search"
                         element={

@@ -17,22 +17,14 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import InputAdornment from "@mui/material/InputAdornment";
 import { Mode } from "~/shared/layout/header";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import {
-    Link,
-    useLocation,
-    useNavigate,
-    useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { changeLanguage, changeMode } from "~/shared/store/mainSlice";
 import { useAppDispatch } from "~app/hooks";
-import PowerSettingsNewRoundedIcon from "@mui/icons-material/PowerSettingsNewRounded";
 import SettingsTwoToneIcon from "@mui/icons-material/SettingsTwoTone";
 import { useAppSelector } from "~app/hooks";
 import { RootState } from "~app/store";
-import { userLogOut } from "~/shared/store/userAction";
 import useLocalStorage from "~/shared/hooks/useLocalStorage";
 import { getMessageTooltip } from "./input.text";
-import { Link as LinkRTD } from "react-router-dom";
 import GTranslateTwoToneIcon from "@mui/icons-material/GTranslateTwoTone";
 import { changeStatus } from "~/shared/store/status.auth";
 
@@ -108,7 +100,7 @@ const CustomizedInputBase = ({
 
     const handleSecurityLink = (link: string) => {
         if (!user) {
-            dispatch(changeStatus(true));
+            navigate("/user/login", { state: { link: location.pathname } });
         } else {
             navigate(link);
         }

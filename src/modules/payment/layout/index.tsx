@@ -66,9 +66,15 @@ const PaymentLayout = () => {
 
     useEffect(() => {
         if (location.state?.products) {
-            const data = location.state.products;
+            if (location.state.from === "cart") {
+                const data = location.state.products;
 
-            setProducts(cart.filter((item) => data.includes(item.productId)));
+                setProducts(
+                    cart.filter((item) => data.includes(item.productId))
+                );
+            } else if (location.state.from === "product") {
+                setProducts(location.state.products);
+            }
         } else {
             navigate("/cart");
         }

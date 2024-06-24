@@ -1,6 +1,8 @@
-import axios from "axios";
+// import { axios } from "~app/modules/shared/utils/setHeaderDefault";
+
 import { userSignInProps } from "../store/userAction";
-import { AxiosError } from "axios";
+import axios from "axios";
+
 export interface LoginResponse {
     success: true;
     element: any;
@@ -64,6 +66,10 @@ const userAPI = {
         );
         // console.log(data);
         return data;
+    },
+    verifyEmail: async (token: string) => {
+        const { data } = await axios.get(`/api/v1/auth/activate${token}`);
+        console.log(data);
     },
 };
 

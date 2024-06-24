@@ -25,7 +25,7 @@ import { deleteItemCart } from "~/cart/store/cartAction";
 const CartPage = () => {
     const { lang } = useAppSelector((state: RootState) => state.mainSlice);
     const { cart } = useAppSelector((state: RootState) => state.cartReducer);
-
+    console.log(cart[0]);
     const [check, setCheck] = useState<boolean[]>([]);
     const [num, setNum] = useState<number[]>([]);
     const dispatch = useAppDispatch();
@@ -99,7 +99,7 @@ const CartPage = () => {
 
     const goPayment = () => {
         navigate("/payment", {
-            state: { products: getProductsId(check, cart) },
+            state: { products: getProductsId(check, cart), from: "cart" },
         });
     };
     useEffect(() => {
@@ -214,4 +214,9 @@ function getProductsId(checked: boolean[], products: cartStoreItem[]) {
             return null;
         })
         .filter(Boolean);
+}
+
+interface ZType {
+    key: string;
+    value: string[];
 }
