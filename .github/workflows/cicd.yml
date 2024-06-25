@@ -9,7 +9,7 @@ jobs:
             - name: Checkout Source
               uses: actions/checkout@v4
             - name: Create .env file
-              run: echo "VITE_SERVER_PROD=${{secrets.VITE_SERVER_PROD}}" >> .env && echo "VITE_apiKey=${{secrets.VITE_apiKey}}" >> .env && echo "VITE_authDomain=${{secrets.VITE_authDomain}}" >> .env && echo "VITE_projectId=${{secrets.VITE_projectId}}" >> .env && echo "VITE_storageBucket=${{secrets.VITE_storageBucket}}" >> .env && echo "VITE_messagingSenderId=${{secrets.VITE_messagingSenderId}}" >> .env && echo "VITE_appId=${{secrets.VITE_appId}}" >> .env && echo "VITE_measurementId=${{secrets.VITE_measurementId}}" >> .env
+              run: echo "NODE_ENV=production" >> .env && echo "VITE_SERVER_PROD=${{secrets.VITE_SERVER_PROD}}" >> .env && echo "VITE_apiKey=${{secrets.VITE_apiKey}}" >> .env && echo "VITE_authDomain=${{secrets.VITE_authDomain}}" >> .env && echo "VITE_projectId=${{secrets.VITE_projectId}}" >> .env && echo "VITE_storageBucket=${{secrets.VITE_storageBucket}}" >> .env && echo "VITE_messagingSenderId=${{secrets.VITE_messagingSenderId}}" >> .env && echo "VITE_appId=${{secrets.VITE_appId}}" >> .env && echo "VITE_measurementId=${{secrets.VITE_measurementId}}" >> .env
             - name: Login to docker hub
               run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
             - name: Build Docker Image
