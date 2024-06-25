@@ -17,22 +17,17 @@ COPY . .
 RUN npm run build
 
 # Expose the port that the application runs on
-EXPOSE 5731
+EXPOSE 4000
 
-# Stage 2: Serve the application with Nginx
-FROM nginx:1.23-alpine
 
-# Set the working directory inside the container
-WORKDIR /usr/share/nginx/html
 
-# Remove the default Nginx HTML files
-RUN rm -rf ./*
+FROM nginx:1.23-alpine as production-build
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+## Remove default nginx index page
+RUN rm -rf /usr/share/nginx/html/*
+# Copy from the stage 1
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy the build output from the previous stage to the Nginx directory
-COPY --from=build /app/build .
 
-# Expose port 80
 EXPOSE 80
-
-# Start Nginx when the container launches
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
