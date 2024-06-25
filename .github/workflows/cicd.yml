@@ -24,4 +24,4 @@ jobs:
             - name: Delete old container
               run: docker rm -rf ui-shopdev || true
             - name: Run docker container
-              run: docker run -d -p 4000:80 --name ui-shopdev mui-shopdev
+              run: docker run -d -p 4000:80 --name ui-shopdev hieupc05/mui-shopdev
