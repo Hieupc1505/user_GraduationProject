@@ -16,7 +16,7 @@ import Info from "~/setting/components/Info";
 import LikedProduct from "~/setting/scenes/liked";
 import Ordered from "~/setting/scenes/buyed";
 import OrderDetail from "~/setting/scenes/orderDetail";
-
+import Test from "~/shared/components/Carousel/test";
 import AuthLayout from "~/auth/layout";
 
 function App() {
@@ -61,6 +61,7 @@ function App() {
                         path="/activate"
                         element={<AuthLayout page={"active"} />}
                     />
+                    <Route path="/test" element={<Test />} />
 
                     <Route
                         path="/search"

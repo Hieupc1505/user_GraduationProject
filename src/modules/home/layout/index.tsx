@@ -7,8 +7,8 @@ import type { RootState } from "~app/store";
 import ProductLists from "~/shared/components/ProductLists";
 import ProductItem from "~/shared/components/ProductItem";
 import { Link } from "react-router-dom";
-import BannerAvatar from "../components/BannerAvatar";
 import FashionType from "../components/FashionType";
+import CarouselImages from "../components/CarouselImages";
 
 import { homeData } from "../store/homeAction";
 import ProductSlide from "~/shared/components/ProductSlide";
@@ -30,7 +30,7 @@ const MainLayout = () => {
 
     return (
         <main>
-            <BannerAvatar />
+            <CarouselImages />
             <BennerList
                 mode={modeTheme}
                 content={mainTextStore.bannerList}
