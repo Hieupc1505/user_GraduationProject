@@ -8,12 +8,10 @@ jobs:
         steps:
             - name: Checkout Source
               uses: actions/checkout@v4
-            - name: Create .env file
-              run: echo "NODE_ENV=production" >> .env && echo "VITE_SERVER_PROD=${{secrets.VITE_SERVER_PROD}}" >> .env && echo "VITE_apiKey=${{secrets.VITE_apiKey}}" >> .env && echo "VITE_authDomain=${{secrets.VITE_authDomain}}" >> .env && echo "VITE_projectId=${{secrets.VITE_projectId}}" >> .env && echo "VITE_storageBucket=${{secrets.VITE_storageBucket}}" >> .env && echo "VITE_messagingSenderId=${{secrets.VITE_messagingSenderId}}" >> .env && echo "VITE_appId=${{secrets.VITE_appId}}" >> .env && echo "VITE_measurementId=${{secrets.VITE_measurementId}}" >> .env
             - name: Login to docker hub
               run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
             - name: Build Docker Image
-              run: docker build -t hieupc05/mui-shopdev .
+              run: docker build -t hieupc05/mui-shopdev --build-arg NODE_ENV=production --build-arg VITE_SERVER_PROD=${{secrets.VITE_SERVER_PROD}} --build-arg VITE_apiKey=${{secrets.VITE_apiKey}} --build-arg VITE_authDomain=${{secrets.VITE_authDomain}} --build-arg VITE_projectId=${{secrets.VITE_projectId}} --build-arg VITE_storageBucket=${{secrets.VITE_storageBucket}} --build-arg VITE_messagingSenderId=${{secrets.VITE_messagingSenderId}} --build-arg VITE_appId=${{secrets.VITE_appId}} --build-arg VITE_measurementId=${{secrets.VITE_measurementId}} .
             - name: Publish Image to docker hub
               run: docker push hieupc05/mui-shopdev:latest
 
@@ -24,6 +22,6 @@ jobs:
             - name: Pull image from docker hub
               run: docker pull hieupc05/mui-shopdev:latest
             - name: Delete old container
-              run: docker rm -f ui-shopdev || true
+              run: docker rm -rf ui-shopdev || true
             - name: Run docker container
               run: docker run -d -p 4000:80 --name ui-shopdev hieupc05/mui-shopdev
