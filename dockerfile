@@ -1,26 +1,5 @@
 # Stage 1: Build the Node.js application
 FROM node:current-alpine3.20 as build
-
-# Define build arguments for environment variables
-ARG VITE_SERVER_PROD
-ARG VITE_apiKey
-ARG VITE_authDomain
-ARG VITE_projectId
-ARG VITE_storageBucket
-ARG VITE_messagingSenderId
-ARG VITE_appId
-ARG VITE_measurementId
-
-# Set environment variables during the build process
-ENV VITE_SERVER_PROD=$VITE_SERVER_PROD
-ENV VITE_apiKey=$VITE_apiKey
-ENV VITE_authDomain=$VITE_authDomain
-ENV VITE_projectId=$VITE_projectId
-ENV VITE_storageBucket=$VITE_storageBucket
-ENV VITE_messagingSenderId=$VITE_messagingSenderId
-ENV VITE_appId=$VITE_appId
-ENV VITE_measurementId=$VITE_measurementId
-
 # Set the working directory inside the container
 WORKDIR /app
 

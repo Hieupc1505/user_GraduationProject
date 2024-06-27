@@ -1,0 +1,8 @@
+version: "3"
+services:
+    mui-shopdev:
+        build:
+            context: .
+        container_name: ui-shopdev
+        ports:
+            - "4000:80"

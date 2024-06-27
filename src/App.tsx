@@ -18,7 +18,7 @@ import Ordered from "~/setting/scenes/buyed";
 import OrderDetail from "~/setting/scenes/orderDetail";
 import Test from "~/shared/components/Carousel/test";
 import AuthLayout from "~/auth/layout";
-
+console.log(import.meta.env);
 function App() {
     return (
         <CssVarsProvider theme={theme}>
