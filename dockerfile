@@ -32,7 +32,6 @@ COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose HTTP and HTTPS ports
 EXPOSE 80
-EXPOSE 443
 
 # Entrypoint command
 CMD ["nginx", "-g", "daemon off;"]
