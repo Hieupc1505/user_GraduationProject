@@ -24,6 +24,8 @@ jobs:
 
             - name: Delete old container
               run: docker rm -f ui-shopdev || true
+            - name: Delete old certbot container
+              run: docker rm -f certbot || true
 
             - name: Run Shopdev Container
               run: docker run -d --name ui-shopdev -p 80:80 -p 443:443 -v ~/certbot/conf:/etc/letsencrypt -v ~/certbot/www:/var/www/certbot hieupc05/mui-shopdev:latest
