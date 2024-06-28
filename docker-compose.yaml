@@ -5,4 +5,4 @@ services:
             context: .
         container_name: ui-shopdev
         ports:
-            - "4000:80"
+            - "80:80"
