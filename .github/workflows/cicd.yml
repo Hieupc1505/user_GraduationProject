@@ -21,7 +21,8 @@ jobs:
         steps:
             - name: Pull image from docker hub
               run: docker pull hieupc05/mui-shopdev:latest
-            - name: Delete old container
-              run: docker rm -f ui-shopdev || true
-            - name: Run docker container
-              run: docker run -d -p 80:80 --name ui-shopdev --network=server-shopdev-network hieupc05/mui-shopdev
+            - name: Stop and Remove Old Containers
+              run: docker compose down
+
+            - name: Start Containers
+              run: docker compose up -d

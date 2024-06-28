@@ -1,8 +1,27 @@
 version: "3"
 services:
-    mui-shopdev:
-        build:
-            context: .
-        container_name: ui-shopdev
+    nginx:
+        image: hieupc05/mui-shopdev:latest
         ports:
             - "80:80"
+            - "443:443"
+        volumes:
+            - ./certbot/conf:/etc/letsencrypt
+            - ./certbot/www:/var/www/certbot
+
+        networks:
+            - shopdev-network
+
+    certbot:
+        image: certbot/certbot
+        container_name: certbot
+        volumes:
+            - ./certbot/conf:/etc/letsencrypt
+            - ./certbot/www:/var/www/certbot
+        command: certonly --webroot -w /var/www/certbot --force-renewal --email hoanghieuss3344@gmail.com -d shop.izsports.online --agree-tos
+        networks:
+            - shopdev-network
+
+networks:
+    shopdev-network:
+        driver: bridge
