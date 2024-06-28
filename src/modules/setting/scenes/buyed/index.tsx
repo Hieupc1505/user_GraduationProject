@@ -26,7 +26,6 @@ const Ordered = () => {
     const naviage = useNavigate();
 
     const handleOrderDetail = (_id: string) => {
-        console.log(_id);
         naviage(`/settings/order/detail/${_id}`);
     };
 

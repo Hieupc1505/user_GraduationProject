@@ -26,7 +26,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProductInfoFeature from "../ProductInfoFeature";
 import { RootState } from "~app/store";
 import { changeStatus } from "~/shared/store/snackbar";
-import { cartItemProps } from "~/cart/store/cartSlice";
+import cartSlice, { cartItemProps } from "~/cart/store/cartSlice";
 import { errorProductPreview } from "./text";
 // import { getText } from "~/shared/utils/getTextbyLang";
 import { getMessage } from "~/product/layout/prodDetail.text";
@@ -77,7 +77,9 @@ const ProductPreview = ({
         if (!user) {
             navigate("/user/login", { state: { link: location.pathname } });
         } else if (product && id && user)
-            if (!productExistInCart)
+            if (!productExistInCart(id, cart))
+                // console.log(`check:::${productExistInCart}`);
+
                 dispatch(
                     addToCart({
                         productId: id,
@@ -98,7 +100,6 @@ const ProductPreview = ({
     };
 
     const handleByNow = async (num: number, options: string) => {
-        console.log(product);
         if (!user)
             navigate("/user/login", { state: { link: location.pathname } });
         else if (product && id && user) {

@@ -94,7 +94,6 @@ const CustomizedInputBase = ({
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         setLib(data.get("search")?.toString());
-        console.log("search");
         navigate(`/search?key=${data.get("search")}`);
     };
 

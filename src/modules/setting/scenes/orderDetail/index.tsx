@@ -136,7 +136,6 @@ const OrderDetail = () => {
         );
     };
 
-    console.log(data);
     return (
         <Box m={"20px"}>
             <Box

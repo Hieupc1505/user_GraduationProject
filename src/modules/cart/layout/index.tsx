@@ -25,7 +25,6 @@ import { deleteItemCart } from "~/cart/store/cartAction";
 const CartPage = () => {
     const { lang } = useAppSelector((state: RootState) => state.mainSlice);
     const { cart } = useAppSelector((state: RootState) => state.cartReducer);
-    console.log(cart[0]);
     const [check, setCheck] = useState<boolean[]>([]);
     const [num, setNum] = useState<number[]>([]);
     const dispatch = useAppDispatch();
@@ -187,17 +186,6 @@ const CartPage = () => {
                                 {"Có Thể Bạn Cũng Sẽ Thích"}
                             </Typography>
                         </Grid>
-                        {/* {Array.from({ length: 12 }, (_, index) => (
-                            <Grid key={index} item xs={12 / 4}>
-                                <Link to={"/product/3535kj"}>
-                                    <ProductItem
-                                        lang={lang}
-                                        variant="square"
-                                        sale={20}
-                                    />
-                                </Link>
-                            </Grid>
-                        ))} */}
                     </ProductLists>
                 </Container>
             </Container>

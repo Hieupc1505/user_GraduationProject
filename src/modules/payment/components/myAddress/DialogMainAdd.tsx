@@ -222,9 +222,7 @@ const DialogMainAdd: React.FC<addProps> = ({
         }
         if (key) {
             await orderAPI.updateUserInfo({
-                address: (form.get("detail")?.toString() +
-                    "\n" +
-                    valueAddress) as string,
+                address: valueAddress,
                 number: +number,
                 name: form.get("name")?.toString() || "",
                 avatar: user?.userInfo.avatar || "",
@@ -244,6 +242,9 @@ const DialogMainAdd: React.FC<addProps> = ({
         handleBack(false);
     };
 
+    const getMainAddress = () => {
+        return addr.reverse().filter(Boolean).join(",");
+    };
     const valueAddress = addr[2]
         ? `${addr[0] && addr[0]}${addr[1] && ", " + addr[1]}${
               addr[2] && ", " + addr[2]
@@ -298,15 +299,6 @@ const DialogMainAdd: React.FC<addProps> = ({
             ));
         }
     };
-    // console.log(valueAddress.includes("\n"));
-
-    const convertAddress = (address: string, index: number) => {
-        if (address.includes("\n")) {
-            return address.split("\n")[index];
-        }
-
-        return "";
-    };
 
     return (
         <Box
@@ -350,7 +342,7 @@ const DialogMainAdd: React.FC<addProps> = ({
                         onFocus={handleFocus}
                         focused={key}
                         // onBlur={(e) => handleClose(e)}
-                        value={convertAddress(valueAddress, 1)}
+                        value={getMainAddress()}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -417,20 +409,6 @@ const DialogMainAdd: React.FC<addProps> = ({
                             </CustomTabPanel>
                             <CustomTabPanel value={value} index={2}>
                                 {store?.w.length && generRateAddresss(3)}
-                                {/* <List dense={false} sx={{ pt: 0 }}>
-                                    {generate(
-                                        <ListItem
-                                            sx={{
-                                                "&:hover": {
-                                                    bgcolor: "action.hover",
-                                                },
-                                            }}
-                                            onClick={(e) => handleClick(2, e)}
-                                        >
-                                            <ListItemText primary="Single-line item" />
-                                        </ListItem>
-                                    )}
-                                </List> */}
                             </CustomTabPanel>
                         </Box>
                     </Collapse>
@@ -444,7 +422,7 @@ const DialogMainAdd: React.FC<addProps> = ({
                     fullWidth
                     name="detail"
                     defaultValue={data?.detail}
-                    value={convertAddress(valueAddress, 0)}
+                    // value={convertAddress(valueAddress, 0)}
                 />
                 <Box>
                     <FormControlLabel

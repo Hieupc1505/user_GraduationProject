@@ -69,7 +69,6 @@ const userAPI = {
     },
     verifyEmail: async (token: string) => {
         const { data } = await axios.get(`/api/v1/auth/activate${token}`);
-        console.log(data);
     },
 };
 

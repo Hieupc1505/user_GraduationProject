@@ -23,7 +23,6 @@ interface UploadProps {
 
 const UploadImage = ({ url, changeImage }: UploadProps) => {
     const [image, setImage] = useState<string>(() => url ?? "");
-    console.log(image);
 
     const showImage = async (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;

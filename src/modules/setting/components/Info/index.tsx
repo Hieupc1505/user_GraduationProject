@@ -10,8 +10,6 @@ import {
     Button,
     Grid,
     Slider,
-    Input,
-    TextField,
 } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -19,7 +17,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
 import React from "react";
 import CustomTextField from "../CustomTextfield";
-import { storeText } from "../Navigate/navigate.text";
 import { useAppSelector } from "~app/hooks";
 import { RootState } from "~app/store";
 import CustomAutoplete from "../CustomAutoplete";
@@ -134,19 +131,6 @@ const Info = () => {
             return prevDate;
         });
     }, []);
-
-    const handleSubmitForm = useCallback(
-        (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const data = new FormData(event.currentTarget);
-
-            console.log(data.get("firstname"));
-            console.log(date.toString().split(",").join("/"));
-        },
-        []
-    );
-
-    // console.log(errors);
 
     return (
         <Box>
