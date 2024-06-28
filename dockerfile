@@ -8,30 +8,18 @@ COPY package*.json ./
 
 # Install the dependencies
 RUN npm install
-
 # Copy the rest of the application files
 COPY . .
-
 # Build the application
 RUN npm run build
 
-# Stage 2: Setup nginx and SSL
-FROM nginx:1.23-alpine
-
-# Install Certbot
-RUN apk update && apk add certbot
-
-# Copy nginx configuration file
+FROM nginx:1.23-alpine as production-build
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Remove default nginx index page
+## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
-
-# Copy built application from stage 1
+# Copy from the stage 1
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expose HTTP and HTTPS ports
-EXPOSE 80
 
-# Entrypoint command
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
