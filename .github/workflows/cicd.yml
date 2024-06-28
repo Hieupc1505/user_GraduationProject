@@ -21,8 +21,12 @@ jobs:
         steps:
             - name: Pull image from docker hub
               run: docker pull hieupc05/mui-shopdev:latest
-            - name: Stop and Remove Old Containers
-              run: docker compose -f ~/actions-runner-ui/_work/user_GraduationProject/user_GraduationProject/docker-compose.yaml down
 
-            - name: Start Containers
-              run: docker compose -f ~/actions-runner-ui/_work/user_GraduationProject/user_GraduationProject/docker-compose.yaml up -d
+            - name: Delete old container
+              run: docker rm -f ui-shopdev || true
+
+            - name: Run Shopdev Container
+              run: docker run -d --name ui-shopdev -p 80:80 -p 443:443 -v $(pwd)/certbot/conf:/etc/letsencrypt -v $(pwd)/certbot/www:/var/www/certbot hieupc05/mui-shopdev:latest
+
+            - name: Run Certbot Container
+              run: docker run --name certbot -v $(pwd)/certbot/conf:/etc/letsencrypt -v $(pwd)/certbot/www:/var/www/certbot certbot/certbot certonly --webroot -w /var/www/certbot --force-renewal --email hoanghieuss3344@gmail.com -d shop.izsports.online --agree-tos
